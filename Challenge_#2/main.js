@@ -3,7 +3,7 @@ const csvToRows = (str) => {
     let output = [];
     
     for (const row of str.split('\n')) {
-      output.push(row.split(','));
+      output.push(row);
     }
 
     return output;
@@ -12,7 +12,10 @@ const csvToRows = (str) => {
 
 
 // Remove duplicate rows from the Array
-const removeDuplicateRows = (arr) => {};
+const removeDuplicateRows = (arr) => {
+    let uniques = [...new Set(arr)];
+    return uniques;
+};
 
 // Convert Array of string rows to objects using the row at index 0 as property names
 const strRowsToObjects = (arr) => {};
@@ -40,6 +43,9 @@ let str = `id,first_name,last_name,email,designation,registeredOn
 2,Rafaellle,Francescone,Rafaellle@jscorp.co,Quality Engineer,1591762193
 3,Hort,Shufflebotham,Hort@jscorp.co,Paralegal,1604920379
 4,Raimundo,Beddingham,Raimundo@jscorp.co,Librarian,1590530472
+5,Jamaal,Hyde,Jamaal@jscorp.co,Quality Engineer,1606653657
 5,Jamaal,Hyde,Jamaal@jscorp.co,Quality Engineer,1606653657`;
 
 console.table(csvToRows(str));
+
+console.log(removeDuplicateRows(csvToRows(str)));
