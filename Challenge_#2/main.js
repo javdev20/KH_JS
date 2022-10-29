@@ -38,7 +38,7 @@ const strRowsToObjects = (arr) => {
   return objects;
 };
 
-let str = `id,first_name,last_name,email,designation,registeredOn
+let employees = `id,first_name,last_name,email,designation,registeredOn
 1,Kata,Petrollo,Kata@jscorp.co,Budget/Accounting Analyst IV,1586786455
 2,Rafaellle,Francescone,Rafaellle@jscorp.co,Quality Engineer,1591762193
 3,Hort,Shufflebotham,Hort@jscorp.co,Paralegal,1604920379
@@ -46,19 +46,17 @@ let str = `id,first_name,last_name,email,designation,registeredOn
 5,Jamaal,Hyde,Jamaal@jscorp.co,Quality Engineer,1606653657
 5,Jamaal,Hyde,Jamaal@jscorp.co,Quality Engineer,1606653657`;
 
-// console.log(csvToRows(str));
-
-// console.log(removeDuplicateRows(csvToRows(str)));
-
-// console.log(strRowsToObjects(csvToRows(str)));
-
-console.log(strRowsToObjects(csvToRows(str))[1].email);
-
 // Convert the registeredOn epoch timestamps to Date objects
 const timeToDate = (arr) => {};
 
 // Sort the array alphabetically (ascending) by first_name
-const sortByFirstName = (arr) => {};
+const sortByFirstName = (arr) => {
+    arr.sort((a, b) => (a.first_name < b.first_name ? -1 : a.first_name > b.first_name ? 1 : 0));
+    return arr;
+};
+
+console.log(sortByFirstName(strRowsToObjects(removeDuplicateRows(csvToRows(employees))))); 
+console.log(strRowsToObjects(removeDuplicateRows(csvToRows(employees)))); 
 
 // Add a new property named permissions to every object {admin: false,profile: true,billing: true,supervisor: false}
 const addUserPermissions = (arr) => {};
