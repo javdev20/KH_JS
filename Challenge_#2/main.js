@@ -18,7 +18,41 @@ const removeDuplicateRows = (arr) => {
 };
 
 // Convert Array of string rows to objects using the row at index 0 as property names
-const strRowsToObjects = (arr) => {};
+const strRowsToObjects = (arr) => {
+  const headers = arr[0].split(',');
+  let rows = [];
+
+  for (let i = 1; i < arr.length; i++) {
+    rows.push(arr[i]);
+  }
+
+  const objects = rows.map(function (row) {
+    const values = row.split(',');
+    const el = headers.reduce(function (object, header, index) {
+      object[header] = values[index];
+      return object;
+    }, {});
+    return el;
+  });
+
+  return objects;
+};
+
+let str = `id,first_name,last_name,email,designation,registeredOn
+1,Kata,Petrollo,Kata@jscorp.co,Budget/Accounting Analyst IV,1586786455
+2,Rafaellle,Francescone,Rafaellle@jscorp.co,Quality Engineer,1591762193
+3,Hort,Shufflebotham,Hort@jscorp.co,Paralegal,1604920379
+4,Raimundo,Beddingham,Raimundo@jscorp.co,Librarian,1590530472
+5,Jamaal,Hyde,Jamaal@jscorp.co,Quality Engineer,1606653657
+5,Jamaal,Hyde,Jamaal@jscorp.co,Quality Engineer,1606653657`;
+
+// console.log(csvToRows(str));
+
+// console.log(removeDuplicateRows(csvToRows(str)));
+
+// console.log(strRowsToObjects(csvToRows(str)));
+
+console.log(strRowsToObjects(csvToRows(str))[1].email);
 
 // Convert the registeredOn epoch timestamps to Date objects
 const timeToDate = (arr) => {};
@@ -37,15 +71,3 @@ const findBadEmailIds = (arr) => {
 // Implement the data processing pipeline using the functions above and return an array of user objects with no duplicates, sorted by first_name, timestamps converted to date objects and the user permissions object added.
 const processData = (data) => {};
 
-
-let str = `id,first_name,last_name,email,designation,registeredOn
-1,Kata,Petrollo,Kata@jscorp.co,Budget/Accounting Analyst IV,1586786455
-2,Rafaellle,Francescone,Rafaellle@jscorp.co,Quality Engineer,1591762193
-3,Hort,Shufflebotham,Hort@jscorp.co,Paralegal,1604920379
-4,Raimundo,Beddingham,Raimundo@jscorp.co,Librarian,1590530472
-5,Jamaal,Hyde,Jamaal@jscorp.co,Quality Engineer,1606653657
-5,Jamaal,Hyde,Jamaal@jscorp.co,Quality Engineer,1606653657`;
-
-console.table(csvToRows(str));
-
-console.log(removeDuplicateRows(csvToRows(str)));
