@@ -47,7 +47,13 @@ let employees = `id,first_name,last_name,email,designation,registeredOn
 5,Jamaal,Hyde,Jamaal@jscorp.co,Quality Engineer,1606653657`;
 
 // Convert the registeredOn epoch timestamps to Date objects
-const timeToDate = (arr) => {};
+const timeToDate = (arr) => {
+  for (let i = 1; i < arr.length; i++) {
+    arr[i].registeredOn = new Date(arr[i].registeredOn * 1000);
+  }
+
+  return arr;
+};
 
 // Sort the array alphabetically (ascending) by first_name
 const sortByFirstName = (arr) => {
@@ -57,6 +63,7 @@ const sortByFirstName = (arr) => {
 
 console.log(sortByFirstName(strRowsToObjects(removeDuplicateRows(csvToRows(employees))))); 
 console.log(strRowsToObjects(removeDuplicateRows(csvToRows(employees)))); 
+console.log(timeToDate(strRowsToObjects(removeDuplicateRows(csvToRows(employees))))); 
 
 // Add a new property named permissions to every object {admin: false,profile: true,billing: true,supervisor: false}
 const addUserPermissions = (arr) => {};
