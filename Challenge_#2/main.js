@@ -48,9 +48,10 @@ let employees = `id,first_name,last_name,email,designation,registeredOn
 
 // Convert the registeredOn epoch timestamps to Date objects
 const timeToDate = (arr) => {
-  for (let i = 1; i < arr.length; i++) {
-    arr[i].registeredOn = new Date(arr[i].registeredOn * 1000);
-  }
+  
+  arr.forEach(element => {
+    element.registeredOn = new Date(element.registeredOn * 1000);
+  });
 
   return arr;
 };
@@ -61,12 +62,27 @@ const sortByFirstName = (arr) => {
     return arr;
 };
 
-console.log(sortByFirstName(strRowsToObjects(removeDuplicateRows(csvToRows(employees))))); 
-console.log(strRowsToObjects(removeDuplicateRows(csvToRows(employees)))); 
-console.log(timeToDate(strRowsToObjects(removeDuplicateRows(csvToRows(employees))))); 
-
 // Add a new property named permissions to every object {admin: false,profile: true,billing: true,supervisor: false}
-const addUserPermissions = (arr) => {};
+const addUserPermissions = (arr) => {
+      const permission = {
+          permissions: {
+            admin: false,
+            profile: true,
+            billing: true,
+            supervisor: false,
+          }
+      }
+
+      let details = [];
+      
+      arr.forEach(element => {
+          details.push(Object.assign({}, element, permission));
+      });
+
+      return details;
+};
+
+console.log(addUserPermissions(timeToDate(strRowsToObjects(removeDuplicateRows(csvToRows(employees)))))); 
 
 // Find user objects with bad ill-formed/bad email IDs and return them as result
 const findBadEmailIds = (arr) => {
