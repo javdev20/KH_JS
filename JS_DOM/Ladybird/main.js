@@ -59,3 +59,19 @@ leftBtn.addEventListener('click', stepLeft);
 homeBtn.addEventListener('click', home);
 turnClockWiseBtn.addEventListener('click', turnClockWise);
 turnAntiClockWiseBtn.addEventListener('click', turnAntiClockWise);
+
+const keyMapping = {
+    ArrowUp: stepUp,
+    ArrowDown: stepDown,
+    ArrowLeft: stepLeft,
+    ArrowRight: stepRight,
+    ']': turnClockWise,
+    '[': turnAntiClockWise,
+    H: home,
+    h: home,
+};
+
+document.addEventListener('keyup', function (event) {
+    const { key } = event;
+    keyMapping[key]();
+});
